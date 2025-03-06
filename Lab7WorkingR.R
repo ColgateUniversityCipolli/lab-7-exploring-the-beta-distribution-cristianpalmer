@@ -12,8 +12,8 @@ mutate(
   Mean = Alpha / (Alpha + Beta),
   Variance = (Alpha * Beta) / ((Alpha + Beta)^2 * (Alpha + Beta + 1)),
   Skewness = (2 * (Beta - Alpha)) * (sqrt(Alpha + Beta + 1)) / ((Alpha + Beta + 2) * sqrt(Alpha * Beta)),
-  Excess_Kurtosis = ((6 * (((Alpha + Beta)^2) * (Alpha + Beta + 1) - 
-  Alpha * Beta * (Alpha + Beta + 2))) / ((Alpha * Beta) * (Alpha + Beta + 2) * (Alpha + Beta + 3))) - 3) |>
+  Excess_Kurtosis = ((6 * (((Alpha - Beta)^2) * (Alpha + Beta + 1) - 
+  Alpha * Beta * (Alpha + Beta + 2))) / ((Alpha * Beta) * (Alpha + Beta + 2) * (Alpha + Beta + 3)))) |>
   mutate(Case = c("Case1","Case2","Case3","Case4")) |>
   select(Case, everything())
 
@@ -103,8 +103,29 @@ ggplot(data= q1.fig.dat)+                                              # specify
   theme(legend.position = "bottom") +                                  # move legend to bottom
   ggtitle("Beta(a = 0.5, B = 0.5) Distribution")                           # title graph      
 ########################################################################################################
-#Task One: Compute the Moments
-function <- beta.moment()
+#Task Two: Compute the Moments
+
+beta.moment <- function(alpha, beta, k, centered = TRUE) {
+  if(centered==FALSE){
+    #Calculates mean when not centered
+    mean <- function(x) {(x^k)*(dbeta(x,alpha,beta))}
+    integrate(mean, lower = 0, upper = Inf)$value
+  }else{
+    #Calculates mean when centered
+    mean <- function(x) {(x^1)*(dbeta(x,alpha,beta))}
+    mean <- integrate(mean, lower = 0, upper = Inf)$value
+    #Calculates variance
+    var <- function(x) {((x-mean)^k)*(dbeta(x,alpha,beta))}
+    integrate(var, lower = 0, upper = Inf)$value
+    }
+  }
+#Can use this function to calculate skewness and kurtosis
+########################################################################################################
+#Task Three: Do Data Summaries Help?
 
 
-
+  
+  
+  
+  
+  
