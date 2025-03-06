@@ -123,9 +123,20 @@ beta.moment <- function(alpha, beta, k, centered = TRUE) {
 ########################################################################################################
 #Task Three: Do Data Summaries Help?
 
-
+##########################
+# Generate a sample
+##########################
+set.seed(7272) # Set seed so we all get the same results.
+sample.size <- 500 # Specify sample details
+alpha <- 2
+beta <- 5
+beta.sample <- rbeta(n = sample.size,  # sample size
+                     shape1 = alpha,   # alpha parameter
+                     shape2 = beta)    # beta parameter
   
-  
-  
-  
-  
+#Histogram for Beta(a = 2, B = 5) Distribution
+beta.sample <- data.frame(x = beta.sample)
+ggplot(beta.sample, aes(x = x)) +  
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram for Beta(a = 2, B = 5) Distribution")
