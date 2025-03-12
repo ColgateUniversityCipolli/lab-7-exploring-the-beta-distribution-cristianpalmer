@@ -397,3 +397,33 @@ Tibble_task_5 <- tibble(
   skewness = skewnesses,
   excess_kurtosis = excess_kurtoses
 )
+
+#Plot a Histogram for Means
+means_histogram <- ggplot(Tibble_task_5, aes(x = mean)) +  
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram of Means")
+
+#Plot a Histogram for Variances
+variance_histogram <- ggplot(Tibble_task_5, aes(x = variance)) +  
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram of Variances")
+
+#Plot a Histogram for skewnesses
+skewness_histogram <- ggplot(Tibble_task_5, aes(x = skewness)) +  
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram of Skewnesses")
+
+#Plot a Histogram for excess_kurtosis
+excess_kurtosis_histogram <- ggplot(Tibble_task_5, aes(x = excess_kurtosis)) +  
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram of Excess_Kurtoses")
+
+#Extra
+# Combine the Histograms
+combined_histogram <- (means_histogram + variance_histogram) / 
+  (skewness_histogram + excess_kurtosis_histogram)
+########################################################################################################
