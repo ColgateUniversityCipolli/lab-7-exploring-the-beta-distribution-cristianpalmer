@@ -320,21 +320,24 @@ Beta_2_5_Kurtosis_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observation
 
 ########################################################################################################
 #For() loop to simulate new data
-
+#Create Sample
 for (i in 2:50) {
   set.seed(7272+i)
   new_sample <- rbeta(n = 500, shape1 = 2, shape2 = 5)
+#Calculate New Cumulative Statistics
   cum_mean <- cummean(new_sample)
   cum_var <- cumvar(new_sample)
   cum_skew <- cumskew(new_sample)
   cum_kurt <- cumkurt(new_sample)-3
-  new_data <- data.frame(
+#Create Tibble of New Data
+  new_data <- tibble(
   Number_of_Observations = 1:500,
   cumulative_mean_loop = cum_mean,
   cumulative_variance_loop = cum_var,
   cumulative_skewness_loop = cum_skew,
   cumulative_excess_kurtosis_loop = cum_kurt
   )
+  
 #Add this line to the Mean Plot 
   Beta_2_5_Mean_Graph <- Beta_2_5_Mean_Graph + 
     geom_line(data = new_data, aes(x = Number_of_Observations, y = cumulative_mean_loop), 
@@ -355,6 +358,7 @@ for (i in 2:50) {
     geom_line(data = new_data, aes(x = Number_of_Observations, y = cumulative_excess_kurtosis_loop), 
               color = i)
 }
+
 #Use Patchwork Package to put graphs into 1 2x2 Grid
 #install.packages("patchwork")
 library(patchwork)
@@ -365,4 +369,25 @@ combined_plot <- (Beta_2_5_Mean_Graph + Beta_2_5_Variance_Graph) /
 
 
 ########################################################################################################
+
 #Task Five: How Can we Model the Variation?
+
+#Create Sample
+for (i in 1:1000) {
+  set.seed(7272+i)
+  new_sample <- rbeta(n = 500, shape1 = 2, shape2 = 5)
+  #Calculate New Cumulative Statistics
+  cum_mean <- cummean(new_sample)
+  cum_var <- cumvar(new_sample)
+  cum_skew <- cumskew(new_sample)
+  cum_kurt <- cumkurt(new_sample)-3
+  
+  #Create Tibble of New Data
+  Tibble_task_5 <- tibble(
+    Number_of_Observations = 1:500,
+    cumulative_mean_loop2 = cum_mean,
+    cumulative_variance_loop2 = cum_var,
+    cumulative_skewness_loop2 = cum_skew,
+    cumulative_excess_kurtosis_loop2 = cum_kurt
+  )
+}
