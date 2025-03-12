@@ -372,22 +372,28 @@ combined_plot <- (Beta_2_5_Mean_Graph + Beta_2_5_Variance_Graph) /
 
 #Task Five: How Can we Model the Variation?
 
-#Create Sample
+# Create vectors to store the 1000 statistics
+means <- numeric(1000)
+variances <- numeric(1000)
+skewnesses <- numeric(1000)
+excess_kurtoses <- numeric(1000)
+
+# Run 1000 iterations
 for (i in 1:1000) {
   set.seed(7272+i)
   new_sample <- rbeta(n = 500, shape1 = 2, shape2 = 5)
-  #Calculate New Cumulative Statistics
-  cum_mean <- cummean(new_sample)
-  cum_var <- cumvar(new_sample)
-  cum_skew <- cumskew(new_sample)
-  cum_kurt <- cumkurt(new_sample)-3
   
-  #Create Tibble of New Data
-  Tibble_task_5 <- tibble(
-    Number_of_Observations = 1:500,
-    cumulative_mean_loop2 = cum_mean,
-    cumulative_variance_loop2 = cum_var,
-    cumulative_skewness_loop2 = cum_skew,
-    cumulative_excess_kurtosis_loop2 = cum_kurt
-  )
+  # Calculate statistics for this sample
+  means[i] <- mean(new_sample)
+  variances[i] <- var(new_sample)
+  skewnesses[i] <- skewness(new_sample)  
+  excess_kurtoses[i] <- kurtosis(new_sample) - 3
 }
+
+# Create the final tibble with all 1000 results
+Tibble_task_5 <- tibble(
+  mean = means,
+  variance = variances,
+  skewness = skewnesses,
+  excess_kurtosis = excess_kurtoses
+)
