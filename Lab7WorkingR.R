@@ -1,4 +1,5 @@
 ########################################################################################################
+
 #Task One: Describe the Population Distribution
 #Load TidyVerse
 library(tidyverse)
@@ -252,3 +253,60 @@ Summary_Data <- rbind(beta_2_5_summary, beta_5_5_summary, beta_5_2_summary, beta
 #Merge Tables
 
 Merged_Data <- rbind(Summary_Data, results)
+
+########################################################################################################
+
+#Task Four: Is Sample Size Important?
+#install.packages("cumstats")
+#Load cumstats library
+library(cumstats)
+
+#Compute Cumulative Mean
+beta.sample_2_5 <- beta.sample_2_5 |>
+  mutate("Number_of_Observations" = 1:500)
+data.2_5 <- beta.sample_2_5$x
+#Compute Cumulative Mean
+cumulative_mean = cummean(data.2_5)
+#Compute Cumulative Variance
+cumulative_variance = cumvar(data.2_5)
+#Compute Cumulative Skewness
+cumulative_skewness = cumskew(data.2_5)
+#Compute Cumulative Excess_Kurtosis
+cumulative_excess_kurtosis = cumkurt(data.2_5)-3
+
+#Plot Cumulative Mean Data
+ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_mean)) +  
+  geom_line() +
+  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Mean Data") +
+  xlab("X values") + 
+  ylab("Cumulative Mean") +
+  geom_hline(yintercept = 0.2857143, linetype = "solid", color = "blue", size = 0.5) +
+  theme_minimal()  
+
+#Plot Cumulative Variance Data
+ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_variance)) +  
+  geom_line() +
+  ggtitle("Lineplot for Beta(a = 5, B = 2) Cumulative Variance Data") +
+  xlab("X values") + 
+  ylab("Cumulative Variance") +
+  geom_hline(yintercept = 0.02551020, linetype = "solid", color = "blue", size = 0.5) +
+  theme_minimal()  
+
+#Plot Cumulative Skewness Data
+ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_skewness)) +  
+  geom_line() +
+  ggtitle("Lineplot for Beta(a = 5, B = 5) Cumulative Skewness Data") +
+  xlab("X values") + 
+  ylab("Cumulative Skewness") +
+  geom_hline(yintercept = 0.5962848, linetype = "solid", color = "blue", size = 0.5) +
+  theme_minimal()  
+
+#Plot Cumulative Excess_Kurtosis Data
+ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_excess_kurtosis)) +  
+  geom_line() +
+  ggtitle("Lineplot for Beta(a = 0.50, B = 0.50) Cumulative Excess-Kurotis Data") +
+  xlab("X values") + 
+  ylab("Cumulative Excess_Kurtosis") +
+  geom_hline(yintercept = -0.1200000, linetype = "solid", color = "blue", size = 0.5) +
+  theme_minimal()  
+
