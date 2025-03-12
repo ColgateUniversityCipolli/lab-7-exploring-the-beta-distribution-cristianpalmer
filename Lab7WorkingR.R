@@ -18,7 +18,7 @@ mutate(
   Alpha * Beta * (Alpha + Beta + 2))) / ((Alpha * Beta) * (Alpha + Beta + 2) * (Alpha + Beta + 3)))) |>
   mutate(Value = c("Population","Population","Population","Population")) |>
   mutate(Distribution = c("2,5","5,5","5,2","0.5,0.5")) |>
-  select(Value, Distribution, everything()) 
+  select(Value, Distribution, Mean, Variance, Skewness, Excess_Kurtosis) 
 
 ########################################################################################################
 # Plot the 2,5 Distribution
@@ -153,10 +153,10 @@ ggplot(beta.sample_2_5, aes(x = x)) +
 #Summary for Beta(a = 2, B = 5) Distribution
 beta_2_5_summary <- beta.sample_2_5 |>
   summarize(
-    mean = mean(x),
-    variance = var(x),
-    skewness = skewness(x), 
-    excess_kurtosis = kurtosis(x) 
+    Mean = mean(x),
+    Variance = var(x),
+    Skewness = skewness(x), 
+    Excess_Kurtosis = kurtosis(x) 
   )
 
 ########################################################################################################
@@ -180,10 +180,10 @@ ggplot(beta.sample_5_5, aes(x = x)) +
 #Summary for Beta(a = 5, B = 5) Distribution
 beta_5_5_summary <- beta.sample_5_5 |>
   summarize(
-    mean = mean(x),
-    variance = var(x),
-    skewness = skewness(x), 
-    excess_kurtosis = kurtosis(x) 
+    Mean = mean(x),
+    Variance = var(x),
+    Skewness = skewness(x), 
+    Excess_Kurtosis = kurtosis(x) 
   )
 
 ########################################################################################################
@@ -207,10 +207,10 @@ ggplot(beta.sample_5_2, aes(x = x)) +
 #Summary for Beta(a = 5, B = 2) Distribution
 beta_5_2_summary <- beta.sample_5_2 |>
   summarize(
-    mean = mean(x),
-    variance = var(x),
-    skewness = skewness(x), 
-    excess_kurtosis = kurtosis(x) 
+    Mean = mean(x),
+    Variance = var(x),
+    Skewness = skewness(x), 
+    Excess_Kurtosis = kurtosis(x) 
   )
 ########################################################################################################
 
@@ -248,3 +248,7 @@ Summary_Data <- rbind(beta_2_5_summary, beta_5_5_summary, beta_5_2_summary, beta
   mutate(Distribution = c("2,5","5,5","5,2","0.5,0.5")) |>
   mutate(Value = c("Sample","Sample","Sample","Sample")) |>
   select(Value, Distribution, everything())
+
+#Merge Tables
+
+Merged_Data <- rbind(Summary_Data, results)
