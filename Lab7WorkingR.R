@@ -2,6 +2,8 @@
 #Task One: Describe the Population Distribution
 #Load TidyVerse
 library(tidyverse)
+#Load e1071 for summarizing later
+library(e1071)
 
 # Create a tibble with alpha and beta combinations
 results <- tibble(
@@ -14,8 +16,9 @@ mutate(
   Skewness = (2 * (Beta - Alpha)) * (sqrt(Alpha + Beta + 1)) / ((Alpha + Beta + 2) * sqrt(Alpha * Beta)),
   Excess_Kurtosis = ((6 * (((Alpha - Beta)^2) * (Alpha + Beta + 1) - 
   Alpha * Beta * (Alpha + Beta + 2))) / ((Alpha * Beta) * (Alpha + Beta + 2) * (Alpha + Beta + 3)))) |>
-  mutate(Case = c("Case1","Case2","Case3","Case4")) |>
-  select(Case, everything())
+  mutate(Value = c("Population","Population","Population","Population")) |>
+  mutate(Distribution = c("2,5","5,5","5,2","0.5,0.5")) |>
+  select(Value, Distribution, everything()) 
 
 ########################################################################################################
 # Plot the 2,5 Distribution
@@ -123,20 +126,125 @@ beta.moment <- function(alpha, beta, k, centered = TRUE) {
 ########################################################################################################
 #Task Three: Do Data Summaries Help?
 
-##########################
-# Generate a sample
-##########################
+########################################################################################################
+# Generate a sample for all Histograms
+
 set.seed(7272) # Set seed so we all get the same results.
 sample.size <- 500 # Specify sample details
-alpha <- 2
-beta <- 5
-beta.sample <- rbeta(n = sample.size,  # sample size
-                     shape1 = alpha,   # alpha parameter
-                     shape2 = beta)    # beta parameter
-  
+
+########################################################################################################
+
+#Data for Beta(a = 2, B = 5) Distribution
+alpha_2_5 <- 2
+beta_2_5 <- 5
+beta.sample_2_5 <- rbeta(n = sample.size,  # sample size
+                     shape1 = alpha_2_5,   # alpha parameter
+                     shape2 = beta_2_5)    # beta parameter
+
+########################################################################################################
+
 #Histogram for Beta(a = 2, B = 5) Distribution
-beta.sample <- data.frame(x = beta.sample)
-ggplot(beta.sample, aes(x = x)) +  
+beta.sample_2_5 <- data.frame(x = beta.sample_2_5)
+ggplot(beta.sample_2_5, aes(x = x)) +  
   geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
-  ggtitle("Histogram for Beta(a = 2, B = 5) Distribution")
+  ggtitle("Histogram for Beta(a = 2, B = 5) Distribution") 
+
+#Summary for Beta(a = 2, B = 5) Distribution
+beta_2_5_summary <- beta.sample_2_5 |>
+  summarize(
+    mean = mean(x),
+    variance = var(x),
+    skewness = skewness(x), 
+    excess_kurtosis = kurtosis(x) 
+  )
+
+########################################################################################################
+
+#Data for Beta(a = 5, B = 5) Distribution
+alpha_5_5 <- 5
+beta_5_5 <- 5
+beta.sample_5_5 <- rbeta(n = sample.size,  # sample size
+                     shape1 = alpha_5_5,   # alpha parameter
+                     shape2 = beta_5_5)    # beta parameter
+
+########################################################################################################
+
+#Histogram for Beta(a = 5, B = 5) Distribution
+beta.sample_5_5 <- data.frame(x = beta.sample_5_5)
+ggplot(beta.sample_5_5, aes(x = x)) +  
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram for Beta(a = 5, B = 5) Distribution")
+
+#Summary for Beta(a = 5, B = 5) Distribution
+beta_5_5_summary <- beta.sample_5_5 |>
+  summarize(
+    mean = mean(x),
+    variance = var(x),
+    skewness = skewness(x), 
+    excess_kurtosis = kurtosis(x) 
+  )
+
+########################################################################################################
+
+#Data for Beta(a = 5, B = 2) Distribution
+alpha_5_2 <- 5
+beta_5_2 <- 2
+beta.sample_5_2 <- rbeta(n = sample.size,  # sample size
+                         shape1 = alpha_5_2,   # alpha parameter
+                         shape2 = beta_5_2)    # beta parameter
+
+########################################################################################################
+
+#Histogram for Beta(a = 5, B = 2) Distribution
+beta.sample_5_2 <- data.frame(x = beta.sample_5_2)
+ggplot(beta.sample_5_2, aes(x = x)) +  
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram for Beta(a = 5, B = 2) Distribution")
+
+#Summary for Beta(a = 5, B = 2) Distribution
+beta_5_2_summary <- beta.sample_5_2 |>
+  summarize(
+    mean = mean(x),
+    variance = var(x),
+    skewness = skewness(x), 
+    excess_kurtosis = kurtosis(x) 
+  )
+########################################################################################################
+
+#Data for Beta(a = 0.50, B = 0.50) Distribution
+alpha_0.50_0.50 <- 0.50
+beta_0.50_0.50 <- 0.50
+beta.sample_0.50_0.50 <- rbeta(n = sample.size,  # sample size
+                         shape1 = alpha_0.50_0.50,   # alpha parameter
+                         shape2 = beta_0.50_0.50)    # beta parameter
+
+########################################################################################################
+
+#Histogram for Beta(a = 0.50, B = 0.50) Distribution
+beta.sample_0.50_0.50 <- data.frame(x = beta.sample_0.50_0.50)
+ggplot(beta.sample_0.50_0.50, aes(x = x)) +  
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
+  geom_density(color = "red") +
+  ggtitle("Histogram for Beta(a = 0.50, B = 0.50) Distribution")
+
+
+#Summary for Beta(a = 0.50, B = 0.50) Distribution
+beta_0.50_0.50_summary <- beta.sample_0.50_0.50 |>
+  summarize(
+    Mean = mean(x),
+    Variance = var(x),
+    Skewness = skewness(x), 
+    Excess_Kurtosis = kurtosis(x) 
+  )
+
+########################################################################################################
+
+#Create Tibble of all Summary data
+
+Summary_Data <- rbind(beta_2_5_summary, beta_5_5_summary, beta_5_2_summary, beta_0.50_0.50_summary) |>
+  mutate(Distribution = c("2,5","5,5","5,2","0.5,0.5")) |>
+  mutate(Value = c("Sample","Sample","Sample","Sample")) |>
+  select(Value, Distribution, everything())
