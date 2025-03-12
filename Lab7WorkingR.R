@@ -274,14 +274,34 @@ cumulative_skewness = cumskew(data.2_5)
 #Compute Cumulative Excess_Kurtosis
 cumulative_excess_kurtosis = cumkurt(data.2_5)-3
 
+########################################################################################################
+
 #Plot Cumulative Mean Data
-ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_mean)) +  
+Beta_2_5_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_mean)) +  
   geom_line() +
   ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Mean Data") +
   xlab("X values") + 
   ylab("Cumulative Mean") +
-  geom_hline(yintercept = 0.2857143, linetype = "solid", color = "blue", size = 0.5) +
+  geom_hline(yintercept = 0.2857143, linetype = "solid", color = "blue", size = 0.5) + #Add Y Intercept
   theme_minimal()  
+
+#For Loop Cumulative Mean
+for (i in 2:50) {
+  set.seed(7272+i)
+  new_sample <- rbeta(n = 500, shape1 = 2, shape2 = 5)
+  cum_mean <- cumsum(new_sample) / seq_along(new_sample)
+  new_data <- data.frame(
+  Number_of_Observations = 1:500,
+  cumulative_mean = cum_mean
+  )
+  
+#Add this line to the plot with color based on iteration number
+  Beta_2_5_Graph <- Beta_2_5_Graph + 
+    geom_line(data = new_data, aes(x = Number_of_Observations, y = cumulative_mean), 
+                     color = i)
+}
+
+########################################################################################################
 
 #Plot Cumulative Variance Data
 ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_variance)) +  
@@ -289,8 +309,10 @@ ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_variance)
   ggtitle("Lineplot for Beta(a = 5, B = 2) Cumulative Variance Data") +
   xlab("X values") + 
   ylab("Cumulative Variance") +
-  geom_hline(yintercept = 0.02551020, linetype = "solid", color = "blue", size = 0.5) +
+  geom_hline(yintercept = 0.02551020, linetype = "solid", color = "blue", size = 0.5) + #Add Y Intercept
   theme_minimal()  
+
+########################################################################################################
 
 #Plot Cumulative Skewness Data
 ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_skewness)) +  
@@ -298,8 +320,10 @@ ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_skewness)
   ggtitle("Lineplot for Beta(a = 5, B = 5) Cumulative Skewness Data") +
   xlab("X values") + 
   ylab("Cumulative Skewness") +
-  geom_hline(yintercept = 0.5962848, linetype = "solid", color = "blue", size = 0.5) +
+  geom_hline(yintercept = 0.5962848, linetype = "solid", color = "blue", size = 0.5) + #Add Y Intercept
   theme_minimal()  
+
+########################################################################################################
 
 #Plot Cumulative Excess_Kurtosis Data
 ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_excess_kurtosis)) +  
@@ -307,6 +331,6 @@ ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_excess_ku
   ggtitle("Lineplot for Beta(a = 0.50, B = 0.50) Cumulative Excess-Kurotis Data") +
   xlab("X values") + 
   ylab("Cumulative Excess_Kurtosis") +
-  geom_hline(yintercept = -0.1200000, linetype = "solid", color = "blue", size = 0.5) +
+  geom_hline(yintercept = -0.1200000, linetype = "solid", color = "blue", size = 0.5) + #Add Y Intercept
   theme_minimal()  
 
