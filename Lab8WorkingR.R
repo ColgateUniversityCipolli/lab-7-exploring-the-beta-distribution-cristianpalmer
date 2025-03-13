@@ -68,4 +68,9 @@ ggplot() +
                  aes(x= Percent_Died,
                      y= after_stat(density)),
                  color="lightgrey") +
-  xlab("Percent of Population Which Died in 2022")
+  xlab("Percent of Population Which Died in 2022 For Various Countries")
+
+
+
+
+
