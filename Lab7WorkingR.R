@@ -366,7 +366,7 @@ library(patchwork)
 # Create the combined plot
 combined_plot <- (Beta_2_5_Mean_Graph + Beta_2_5_Variance_Graph) / 
   (Beta_2_5_Skewness_Graph + Beta_2_5_Kurtosis_Graph)
-
+combined_plot
 
 ########################################################################################################
 
@@ -426,4 +426,6 @@ excess_kurtosis_histogram <- ggplot(Tibble_task_5, aes(x = excess_kurtosis)) +
 # Combine the Histograms
 combined_histogram <- (means_histogram + variance_histogram) / 
   (skewness_histogram + excess_kurtosis_histogram)
+combined_histogram
+
 ########################################################################################################
