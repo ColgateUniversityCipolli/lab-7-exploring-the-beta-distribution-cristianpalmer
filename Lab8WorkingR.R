@@ -70,7 +70,10 @@ ggplot() +
                  color="lightgrey") +
   xlab("Percent of Population Which Died in 2022 For Various Countries")
 
-
-
-
-
+ggdat.exp <- tibble(x=seq(0,0.030,length.out=1000)) |>
+  mutate(pdf = dexp(x, rate=1/mean(world_bank_data_2022$'Percent_Died')))
+ggplot()+
+  geom_histogram(data=world_bank_data_2022,
+                 breaks = seq(0, 125, 25),
+                 color="lightgrey")+
+  geom_line(data=ggdat.exp)
