@@ -312,7 +312,7 @@ Beta_2_5_Skewness_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observation
 #Plot Cumulative Excess_Kurtosis Data
 Beta_2_5_Kurtosis_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_excess_kurtosis)) +  
   geom_line() +
-  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Excess-Kurotis Data") +
+  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Excess-Kurtosis Data") +
   xlab("Number Of Observations") + 
   ylab("Cumulative Excess-Kurtosis") +
   geom_hline(yintercept = -0.1200000, linetype = "solid", color = "blue", size = 1.5) + #Add Y Intercept
