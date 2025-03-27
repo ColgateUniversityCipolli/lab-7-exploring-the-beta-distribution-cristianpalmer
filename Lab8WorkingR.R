@@ -132,7 +132,6 @@ sample.size <- 266 # Specify sample details
 
 # Create empty tibble
 results_tibble <- tibble(
-  iteration = numeric(),
   alpha_hat_mom = numeric(),
   beta_hat_mom = numeric(),
   alpha_hat_mle = numeric(),
@@ -169,7 +168,6 @@ for (i in 1:1000){
 # Add results to tibble
   results_tibble <- results_tibble |>
     add_row(
-      iteration = i,
       alpha_hat_mom = alpha.hat.mom8,
       beta_hat_mom = beta.hat.mom8,
       alpha_hat_mle = alpha.hat.mle8,
@@ -178,3 +176,84 @@ for (i in 1:1000){
 }
 
 #Plot estimated densities
+
+#Plot estimated density for alpha for MOM
+
+alpha_MOM <- ggplot(results_tibble) +
+  geom_density(aes(x = alpha_hat_mom), fill = "blue", alpha = 0.5) +
+  labs(
+    title = "Density of Estimated Alpha (Method of Moments)",
+    x = "Estimated Alpha",
+    y = "Density"
+  ) +
+  theme_minimal()
+
+#Plot estimated density for beta for MOM
+
+beta_MOM <- ggplot(results_tibble) +
+  geom_density(aes(x = beta_hat_mom), fill = "red", alpha = 0.5) +
+  labs(
+    title = "Density of Estimated Beta (Method of Moments)",
+    x = "Estimated Beta",
+    y = "Density"
+  ) +
+  theme_minimal()
+
+#Plot estimated density for alpha for MLE
+
+alpha_MLE <- ggplot(results_tibble) +
+  geom_density(aes(x = alpha_hat_mle), fill = "pink", alpha = 0.5) +
+  labs(
+    title = "Density of Estimated Alpha (Maximum Likelihood Estimator)",
+    x = "Estimated Alpha",
+    y = "Density"
+  ) +
+  theme_minimal()
+
+#Plot estimated density for beta for MLE
+
+beta_MLE <- ggplot(results_tibble) +
+  geom_density(aes(x = beta_hat_mle), fill = "purple", alpha = 0.5) +
+  labs(
+    title = "Density of Estimated Beta (Maximum Likelihood Estimator)",
+    x = "Estimated Beta",
+    y = "Density"
+  ) +
+  theme_minimal()
+
+#Use Patchwork Package to put graphs into 1 2x2 Grid
+library(patchwork)
+
+# Create the combined plot
+combined_plot <- (alpha_MOM + beta_MOM) / 
+  (alpha_MLE + beta_MLE)
+combined_plot
+
+# Create tibble with results
+library(xtable)
+results_summary <- tibble(
+  Parameter = c("Alpha MOM", "Beta MOM", "Alpha MLE", "Beta MLE"),
+  Bias = c(
+    mean(results_tibble[[1]]) - 8,
+    mean(results_tibble[[2]]) - 950,
+    mean(results_tibble[[3]]) - 8,
+    mean(results_tibble[[4]]) - 950
+  ),
+  Precision = c(
+    1/var(results_tibble[[1]]),
+    1/var(results_tibble[[2]]),
+    1/var(results_tibble[[3]]),
+    1/var(results_tibble[[4]])
+  ),
+  MSE = c(
+    var(results_tibble[[1]]) + (mean(results_tibble[[1]]) - 8)^2,
+    var(results_tibble[[2]]) + (mean(results_tibble[[2]]) - 950)^2,
+    var(results_tibble[[3]]) + (mean(results_tibble[[3]]) - 8)^2,
+    var(results_tibble[[4]]) + (mean(results_tibble[[4]]) - 950)^2
+  )
+)
+
+# Create xtable from tibble
+xt <- xtable(results_summary, 
+             caption = "Estimation Metrics",
+             label = "tab:estimation_metrics")
