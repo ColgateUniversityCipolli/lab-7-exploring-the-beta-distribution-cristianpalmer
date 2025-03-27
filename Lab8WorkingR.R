@@ -79,7 +79,7 @@ Estimated.Max.Likelihood.Data <- tibble(x = seq(-0.0005, 0.025, length.out=1000)
   mutate(beta.pdf = dbeta(x, alpha.hat.mle, beta.hat.mle)) # Compute Beta PDF
 
 ggplot(data= Estimated.Max.Likelihood.Data)+                           # specify data
-  geom_line(aes(x=x, y=beta.pdf, color="Max L Distribution")) +                      # plot beta dist
+  geom_line(aes(x=x, y=beta.pdf, color="MLE Distribution")) +                      # plot beta dist
   geom_hline(yintercept=0)+                                            # plot x axis
   theme_bw()+                                                          # change theme
   xlab("x")+                                                           # label x axis
@@ -118,11 +118,63 @@ ggplot() +
   geom_hline(yintercept=0)+                                        
   theme_bw() +
   
-  geom_line(aes(x=x, y=beta.pdf, color="Max L Distribution"),
+  geom_line(aes(x=x, y=beta.pdf, color="MLE Distribution"),
             data = Estimated.Max.Likelihood.Data) +         
   geom_hline(yintercept=0)+                                            
   theme_bw() +
   labs(color = "Distribution")
 
 #Task 8: Which estimators should we use?
+alpha8 = 8
+beta8 = 950
+sample.size <- 266 # Specify sample details
+
+
+# Create empty tibble
+results_tibble <- tibble(
+  iteration = numeric(),
+  alpha_hat_mom = numeric(),
+  beta_hat_mom = numeric(),
+  alpha_hat_mle = numeric(),
+  beta_hat_mle = numeric()
+)
+
+for (i in 1:1000){
+  set.seed(7272+i) # Set seed so we all get the same results.
+  beta.sample <- rbeta(n = sample.size,  # sample size
+                       shape1 = alpha8,   # alpha parameter
+                       shape2 = beta8)    # beta parameter
+###################
+# Calculate MOM
   
+  (MOMs <- nleqslv(x = c(1,1), 
+                   fn = MOM.beta,
+                   data= beta.sample))
+  
+  alpha.hat.mom8 <- MOMs$x[1]
+  beta.hat.mom8 <- MOMs$x[2]
+  
+###################
+# Calculate MLE
+  
+  (mles <- optim(par = c(1,1),
+                 fn = llbeta,
+                 data= beta.sample,
+                 neg = TRUE))
+  
+  alpha.hat.mle8 <- mles$par[1]
+  beta.hat.mle8 <- mles$par[2]
+  
+###################
+# Add results to tibble
+  results_tibble <- results_tibble |>
+    add_row(
+      iteration = i,
+      alpha_hat_mom = alpha.hat.mom8,
+      beta_hat_mom = beta.hat.mom8,
+      alpha_hat_mle = alpha.hat.mle8,
+      beta_hat_mle = beta.hat.mle8
+    )
+}
+
+#Plot estimated densities
