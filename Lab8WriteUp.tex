@@ -89,29 +89,17 @@
 \maketitle
 
 \begin{multicols}{2}
-\begin{abstract}
-This document provides a basic template for the 2-page labs we will complete each week. Here, briefly summarize what you did and why it might be helpful. Provide all the top-line conclusions, but avoid providing \emph{all} the details. Results should be limited to ``we show X, Y, and Z."
-\end{abstract}
-
-\noindent \textbf{Keywords:} What topics does the lab cover concerning class? List 3-4 key terms here, separated by semicolons.
 
 \section{Introduction}
-Provide an overarching summary of what you're talking about. In this section, you introduce the idea to the reader, and your goal is to pull them in. What's the mystery you aim to solve?
-
-You want to provide enough background to understand the context of the work. Specifically, what is the question you are addressing? If it applies, describe what information currently exists about this problem, including citations, and explain how the question you're answering complements this work.
-
-Provide a roadmap of the structure of the paper. 
-
-\subsection{Intro Subsection}
-You might need/want to discuss the topics in subsections. Or, you may have multiple questions.
+Lab 8 is a continuation of the work which we began during lab 7. In lab 7, we were tasked with computing the population moments for four distinct cases of the beta distribution, each with a different set of alpha and beta values. In lab 7 we also graphically compared and contrasted the respective beta distributions for each of the four cases we analyzed. Now, in lab 8 we continued to build on our understanding of the beta distribution which we gained during lab 7 by modeling country death rates worldwide with the beta distribution. Our end goal with this lab was to be able to describe the beta distribution. Particularly, this write up aims to provide answers to questions such as: What is the beta distribution? What does it look like? What is it used for? What are its properties? And, what additional information do we gain from the simulations and real data analysis?  
 
 
-\section{Methods}
-Describe the data you are working with, if applicable. Describe the specific process you will follow to answer the question at hand. This does not mean you should write something like this.
-\begin{quote}
-\textit{I did this and then I did that and then I did this other thing and then..., and then..., and then...}
-\end{quote}
-Instead, it should provide a clear and concise narrative that flows from the problem specification in the Introduction to how you will approach answering it. This is where I would expect to see some citations for \texttt{R} packages you will use to conduct the statistical analysis reported in the Results section.
+\section{Density Functions and Parameters}
+To begin, the beta distribution's probability density function (PDF) is given by: 
+\[
+f_X(x \mid \alpha, \beta) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha) \Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1} I(x \in [0,1])
+\]
+This PDF is expressed using the gamma function and involves the random variable x along with parameters alpha and beta. The domain of the beta distribution is restricted to the interval [0,1], meaning $0 \leq x \leq 1$. Additionally, both shape parameters alpha and beta must be strictly positive for the distribution to be properly defined. For example, in lab 7 we constructed a function \texttt{beta.moment()} to calculate the moments of the beta function for any alpha and beta. This function used base \texttt{R}'s \texttt{dbeta()} function which takes alpha, beta, and x as inputs. For our function to work, alpha and beta both needed to be positive or the \texttt{dbeta()} function would not work, causing out \texttt{beta.moment()} function to error out.
 
 
 \subsection{Methods Subsection}
