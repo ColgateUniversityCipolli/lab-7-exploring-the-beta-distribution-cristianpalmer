@@ -281,44 +281,48 @@ cumulative_excess_kurtosis = cumkurt(data.2_5)-3
 #Plot Cumulative Mean Data
 Beta_2_5_Mean_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_mean)) +  
   geom_line() +
-  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Mean Data") +
+  ggtitle("Cumulative Mean Data") +
   xlab("Number Of Observations") + 
   ylab("Cumulative Mean") +
   geom_hline(yintercept = 0.2857143, linetype = "solid", color = "blue", size = 1.5) + #Add Y Intercept
-  theme_minimal()  
+  theme_minimal() +
+  theme(plot.title = element_text(size = 8)) 
 
 ########################################################################################################
 
 #Plot Cumulative Variance Data
 Beta_2_5_Variance_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_variance)) +  
   geom_line() +
-  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Variance Data") +
+  ggtitle("Cumulative Variance Data") +
   xlab("Number Of Observations") + 
   ylab("Cumulative Variance") +
   geom_hline(yintercept = 0.02551020, linetype = "solid", color = "blue", size = 1.5) + #Add Y Intercept
-  theme_minimal()  
+  theme_minimal() +
+  theme(plot.title = element_text(size = 8)) 
 
 ########################################################################################################
 
 #Plot Cumulative Skewness Data
 Beta_2_5_Skewness_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_skewness)) +  
   geom_line() +
-  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Skewness Data") +
+  ggtitle("Cumulative Skewness Data") +
   xlab("Number Of Observations") + 
   ylab("Cumulative Skewness") +
   geom_hline(yintercept = 0.5962848, linetype = "solid", color = "blue", size = 1.5) + #Add Y Intercept
-  theme_minimal()  
+  theme_minimal() +
+  theme(plot.title = element_text(size = 8)) 
   
 ########################################################################################################
 
 #Plot Cumulative Excess_Kurtosis Data
 Beta_2_5_Kurtosis_Graph <- ggplot(beta.sample_2_5, aes(x = Number_of_Observations, y = cumulative_excess_kurtosis)) +  
   geom_line() +
-  ggtitle("Lineplot for Beta(a = 2, B = 5) Cumulative Excess-Kurtosis Data") +
+  ggtitle("Cumulative Excess-Kurtosis Data") +
   xlab("Number Of Observations") + 
   ylab("Cumulative Excess-Kurtosis") +
   geom_hline(yintercept = -0.1200000, linetype = "solid", color = "blue", size = 1.5) + #Add Y Intercept
-  theme_minimal()  
+  theme_minimal() +
+  theme(plot.title = element_text(size = 8))
 
 ########################################################################################################
 #For() loop to simulate new data
@@ -378,7 +382,7 @@ combined_plot
 means <- numeric(1000)
 variances <- numeric(1000)
 skewnesses <- numeric(1000)
-excess_kurtoses <- numeric(1000)
+excess_kurtosis <- numeric(1000)
 
 # Run 1000 iterations
 for (i in 1:1000) {
@@ -389,7 +393,7 @@ for (i in 1:1000) {
   means[i] <- mean(new_sample)
   variances[i] <- var(new_sample)
   skewnesses[i] <- skewness(new_sample)  
-  excess_kurtoses[i] <- kurtosis(new_sample) - 3
+  excess_kurtosis[i] <- kurtosis(new_sample) - 3
 }
 
 # Create the final tibble with all 1000 results
@@ -397,32 +401,32 @@ Tibble_task_5 <- tibble(
   mean = means,
   variance = variances,
   skewness = skewnesses,
-  excess_kurtosis = excess_kurtoses
+  excess_kurtosis = excess_kurtosis
 )
 
 #Plot a Histogram for Means
 means_histogram <- ggplot(Tibble_task_5, aes(x = mean)) +  
   geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
-  ggtitle("Histogram of Means")
+  ggtitle("Means")
 
 #Plot a Histogram for Variances
 variance_histogram <- ggplot(Tibble_task_5, aes(x = variance)) +  
   geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
-  ggtitle("Histogram of Variances")
+  ggtitle("Variances")
 
 #Plot a Histogram for skewnesses
 skewness_histogram <- ggplot(Tibble_task_5, aes(x = skewness)) +  
   geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
-  ggtitle("Histogram of Skewnesses")
+  ggtitle("Skewnesses")
 
 #Plot a Histogram for excess_kurtosis
 excess_kurtosis_histogram <- ggplot(Tibble_task_5, aes(x = excess_kurtosis)) +  
   geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
-  ggtitle("Histogram of Excess_Kurtoses")
+  ggtitle("Excess-Kurtoses")
 
 #Extra
 # Combine the Histograms

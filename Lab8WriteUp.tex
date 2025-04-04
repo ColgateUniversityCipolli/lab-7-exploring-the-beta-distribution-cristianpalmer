@@ -65,7 +65,6 @@
 \usepackage[margin=0.50in]{geometry}
 \usepackage{float}
 \usepackage{multicol}
-
 %fix for figures
 \usepackage{caption}
 \newenvironment{Figure}
@@ -104,13 +103,15 @@ This PDF is expressed using the gamma function and involves the random variable 
 \section{Properties}
 During lab 7 multiple of our tasks saw us calculating certain properties of the beta distribution for our alternate alpha and beta values. Since the distribution’s shape is defined by its parameters, the distributions properties, notably its mean, variance, skewness, and excess kurtosis are also described by the alpha and beta parameters. 
 
-\indent 
-Pictured below is a 2x2 grid of histograms depicting the respective distributions and density curves for the beta distribution with an alpha of 2, and a beta of 5. We iterated over this specific beta distribution 1000 times, each time generating 500 values for each property which we saved to a tibble and graphed below. We utilized the \texttt{patchwork} \citep{patchwork} library in order to orient the four graphs in this 2x2 grid fashion.
-\includegraphics[width=0.5\textwidth]{Rplot.pdf}
 
-
-
+Pictured at the top of the second column is a 2x2 grid of histograms depicting the respective distributions and density curves for the beta distribution with an alpha of 2, and a beta of 5. We iterated over this specific beta distribution 1000 times, each time generating 500 values for each property which we saved to a tibble and graphed below. We utilized the \texttt{patchwork} \citep{patchwork} library in order to orient the four graphs in this 2x2 grid fashion.
+\includegraphics[width=0.435\textwidth]{2x2Plot.pdf}
+\newline \newline \indent 
+Furthermore, the  \texttt{cumstats} \citep{cumstats} package allowed us to compute the cumulative numerical summaries for each property. For 50 iterations of the alpha = 2 and beta = 5 beta distribution, we ran the \texttt{cumstats} functions on a sample size of 500 to generate a set of 50 line plots for each property. For each property, the plot below shows how with a large enough sample size, all the properties all average out to their true value. Plotted below is another 2x2 grid made using \texttt{patchwork}, however this grid depicts four line graphs, each showing 50 different iterations in which each property averages out to their respective true value as the sample size increases. 
+\includegraphics[width=0.435\textwidth]{2x2Grid2.pdf}
 \section{Estimators}
+In lab 8 we were tasked with computing the Method of Moments (M.O.M), and Maximum Likelihood (M.L.E) estimators.
+
 
 \section{Example}
 
@@ -120,9 +121,10 @@ Pictured below is a 2x2 grid of histograms depicting the respective distribution
 \vspace{2em}
 \nocite{tidyverse}
 \nocite{patchwork}
+\nocite{cumstats}
 
 \begin{tiny}
-\bibliography{bib}
+\bibliography{bib.bib}
 \end{tiny}
 \end{multicols}
 
@@ -132,7 +134,5 @@ Pictured below is a 2x2 grid of histograms depicting the respective distribution
 \newpage
 \onecolumn
 \section{Appendix}
-
-If you have anything extra, you can add it here in the appendix. This can include images or tables that don't work well in the two-page setup, code snippets you might want to share, etc.
 
 \end{document}
