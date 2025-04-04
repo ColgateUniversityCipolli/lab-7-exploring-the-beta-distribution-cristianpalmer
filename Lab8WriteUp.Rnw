@@ -40,7 +40,7 @@
 \begin{multicols}{2}
 
 \section{Introduction}
-Lab 8 is a continuation of the work which we began during lab 7. In lab 7, we were tasked with computing the population moments for four distinct cases of the beta distribution, each with a different set of alpha and beta values. In lab 7 we also graphically compared and contrasted the respective beta distributions for each of the four cases we analyzed. Now, in lab 8 we continued to build on our understanding of the beta distribution which we gained during lab 7 by modeling country death rates worldwide with the beta distribution. Our end goal with this lab was to be able to describe the beta distribution. Particularly, this write up aims to provide answers to questions such as: What is the beta distribution? What does it look like? What is it used for? What are its properties? And, what additional information do we gain from the simulations and real data analysis?  
+Lab 8 is a continuation of the work which we began during lab 7. In lab 7, we were tasked with computing the population moments for four distinct cases of the beta distribution and graphically comparing the different cases. In lab 8 we continued to build on our understanding of the beta distribution by modeling country death rates worldwide with the beta distribution. Our end goal with this lab was to be able to describe the beta distribution. Particularly, this write up aims to provide answers to questions such as: What is the beta distribution? What does it look like? What is it used for? What are its properties? And, what additional information do we gain from the simulations and real data analysis?  
 
 
 \section{Density Functions and Parameters}
@@ -48,31 +48,27 @@ To begin, the beta distribution's probability density function (PDF) is given by
 \[
 f_X(x \mid \alpha, \beta) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha) \Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1} I(x \in [0,1])
 \]
-This PDF is expressed using the gamma function and involves the random variable x along with parameters alpha and beta. The domain of the beta distribution is restricted to the interval [0,1], meaning $0 \leq x \leq 1$. Additionally, both shape parameters alpha and beta must be strictly positive for the distribution to be properly defined. For example, in lab 7 we constructed a function \texttt{beta.moment()} to calculate the moments of the beta function for any alpha and beta. This function used base \texttt{R}'s \texttt{dbeta()} function which takes alpha, beta, and x as inputs. For our function to work, alpha and beta both needed to be positive or the \texttt{dbeta()} function would not work, causing out \texttt{beta.moment()} function to error out.
+This PDF is expressed using the gamma function and involves the random variable x along with parameters alpha and beta. The domain of the beta distribution is restricted to the interval [0,1], meaning $0 \leq x \leq 1$. Additionally, both shape parameters alpha and beta must be strictly positive for the distribution to be properly defined. 
+
+\section{Properties}
+During lab 7 multiple of our tasks saw us calculating certain properties of the beta distribution for our alternate alpha and beta values. Since the distribution’s shape is defined by its parameters, the distributions properties, notably its mean, variance, skewness, and excess kurtosis are also described by the alpha and beta parameters. 
+
+\indent 
+Pictured below is a 2x2 grid of histograms depicting the respective distributions and density curves for the beta distribution with an alpha of 2, and a beta of 5. We iterated over this specific beta distribution 1000 times, each time generating 500 values for each property which we saved to a tibble and graphed below. We utilized the \texttt{patchwork} \citep{patchwork} library in order to orient the four graphs in this 2x2 grid fashion.
+\includegraphics[width=0.5\textwidth]{Rplot.pdf}
 
 
-\subsection{Methods Subsection}
-Much like the Introduction, subsections can be helpful for the Methods section. For example, you might describe data collection and the statistical analyses of the collected data in different subsections. Or, you may have different questions that require distinct methods. 
 
-\section{Results}
-Tie together the Introduction -- where you introduce the problem at hand -- and the methods --  what you propose to do to answer the question. Present your data, the results of your analyses, and how each reported aspect contributes to answering the question. This section should include table(s), statistic(s), and graphical displays. Make sure to put the results in a sensible order and that each result contributes a logical and developed solution. It should not just be a list. Avoid being repetitive. 
+\section{Estimators}
 
-\subsection{Results Subsection}
-Subsections can be helpful for the Results section, too. This can be particularly helpful if you have different questions to answer. 
-
-
-\section{Discussion}
- You should objectively evaluate the evidence you found in the data. Do not embellish or wish-terpet (my made-up phase for making an interpretation you, or the researcher, wants to be true without the data \emph{actually} supporting it). Connect your findings to the existing information you provided in the Introduction.
-
-Finally, provide some concluding remarks that tie together the entire paper. Think of the last part of the results as abstract-like. Tell the reader what they just consumed -- what's the takeaway message?
+\section{Example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{2em}
-
-\noindent\textbf{Bibliography:} Note that when you add citations to your bib.bib file \emph{and}
-you cite them in your document, the bibliography section will automatically populate here.
+\nocite{tidyverse}
+\nocite{patchwork}
 
 \begin{tiny}
 \bibliography{bib}
