@@ -148,7 +148,7 @@ beta.sample_2_5 <- rbeta(n = sample.size,  # sample size
 
 #Histogram for Beta(a = 2, B = 5) Distribution
 beta.sample_2_5 <- data.frame(x = beta.sample_2_5)
-ggplot(beta.sample_2_5, aes(x = x)) +  
+twofivehistogram <- ggplot(beta.sample_2_5, aes(x = x)) +  
   geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
   ggtitle("Histogram for Beta(a = 2, B = 5) Distribution") 
@@ -175,7 +175,7 @@ beta.sample_5_5 <- rbeta(n = sample.size,  # sample size
 
 #Histogram for Beta(a = 5, B = 5) Distribution
 beta.sample_5_5 <- data.frame(x = beta.sample_5_5)
-ggplot(beta.sample_5_5, aes(x = x)) +  
+fivefivehistogram <- ggplot(beta.sample_5_5, aes(x = x)) +  
   geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
   ggtitle("Histogram for Beta(a = 5, B = 5) Distribution")
@@ -202,7 +202,7 @@ beta.sample_5_2 <- rbeta(n = sample.size,  # sample size
 
 #Histogram for Beta(a = 5, B = 2) Distribution
 beta.sample_5_2 <- data.frame(x = beta.sample_5_2)
-ggplot(beta.sample_5_2, aes(x = x)) +  
+fivetwohistogram <- ggplot(beta.sample_5_2, aes(x = x)) +  
   geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
   ggtitle("Histogram for Beta(a = 5, B = 2) Distribution")
@@ -228,7 +228,7 @@ beta.sample_0.50_0.50 <- rbeta(n = sample.size,  # sample size
 
 #Histogram for Beta(a = 0.50, B = 0.50) Distribution
 beta.sample_0.50_0.50 <- data.frame(x = beta.sample_0.50_0.50)
-ggplot(beta.sample_0.50_0.50, aes(x = x)) +  
+halfhalfhistogram <- ggplot(beta.sample_0.50_0.50, aes(x = x)) +  
   geom_histogram(aes(y = ..density..), bins = 30, fill = "blue", alpha = 0.5) +
   geom_density(color = "red") +
   ggtitle("Histogram for Beta(a = 0.50, B = 0.50) Distribution")
@@ -242,6 +242,13 @@ beta_0.50_0.50_summary <- beta.sample_0.50_0.50 |>
     Skewness = skewness(x), 
     Excess_Kurtosis = kurtosis(x) 
   )
+
+
+
+# Extra: Combine Graphs
+combined_plot_3 <- (twofivehistogram + fivefivehistogram) / 
+  (fivetwohistogram + halfhalfhistogram)
+combined_plot_3
 
 ########################################################################################################
 

@@ -90,7 +90,7 @@
 \begin{multicols}{2}
 
 \section{Introduction}
-Lab 8 is a continuation of the work which we began during lab 7. In lab 7, we were tasked with computing the population moments for four distinct cases of the beta distribution and graphically comparing the different cases. In lab 8 we continued to build on our understanding of the beta distribution by modeling country death rates worldwide with the beta distribution. Our end goal with this lab was to be able to describe the beta distribution. Particularly, this write up aims to provide answers to questions such as: What is the beta distribution? What does it look like? What is it used for? What are its properties? And, what additional information do we gain from the simulations and real data analysis?  
+Lab 8 is a continuation of the work which we began during lab 7. In lab 7, we were tasked with computing the population moments for four distinct cases of the beta distribution and graphically comparing the different cases. In lab 8 we continued to build on our understanding of the beta distribution by modeling country death rates worldwide with the distribution. Our end goal with this lab was to be able to describe the beta distribution. Particularly, this write up aims to provide answers to questions such as: What is the beta distribution? What does it look like? What is it used for? What are its properties? And, what additional information do we gain from the simulations and real data analysis?  
 
 
 \section{Density Functions and Parameters}
@@ -113,10 +113,10 @@ Furthermore, the  \texttt{cumstats} \citep{cumstats} package allowed us to compu
 In lab 8 we were tasked with computing the Method of Moments (MOM), and Maximum Likelihood (MLE) estimators for the beta distribution which we used to model country death rates worldwide in 2022. The Method of Moments estimator estimates alpha and beta in the beta distribution by equating the sample moments, such as the sample mean and variance, to the theoretical moments of the distribution. The Maximum Likelihood Estimator estimates the parameters of the Beta distribution by maximizing the Beta distribution's likelihood function, which represents the probability of observing the given data as a function of the distribution's parameters.
 
 \section{Example}
-Computing the MOM and MLE estimators gave us estimates of the true values for alpha and beta for the beta distribution which can model country death rates worldwide in 2022. The first graph in the appendix shows both the MLE estimator and the MOM estimator superimposed onto the actual data. Although each estimator slightly underestimates the peak of the distribution, they each very closely follow it and are unsurprisingly nearly identical to each other. 
+Computing the MOM and MLE estimators gave us estimates of the true values for alpha and beta for the beta distribution which can model country death rates worldwide in 2022. The third graph in the appendix shows both the MLE estimator and the MOM estimator superimposed onto the actual data. Although each estimator slightly underestimates the peak of the distribution, they each very closely follow it and are unsurprisingly nearly identical to each other. 
 
 \indent
-The final part of lab 8 tasked us with determining which estimator is better in this case, the MOM estimator or MLE estimator. To do this, we set alpha = 8 and beta = 950, estimates determined from when we computed the MOM and MLE estimates. Setting the number of observations for each estimation to 266, we iterated through the MLE and MOM calculations 1000 times, providing us with 1000 method of moments estimates for alpha and beta, and maximum likelihood estimates for alpha and beta. The second graph in the appendix is another 2x2 grid made with \texttt{patchwork} which shows four density curves, each being attributed to either alpha or beta, and either calculated via the MOM estimator or the MLE. Looking at the graphs themselves, it is hard to determine which estimator is better in this case. Each of the alpha plots are nearly indistinguishable from each other, and so are the beta plots.
+The final part of lab 8 tasked us with determining which estimator is better in this case, the MOM estimator or MLE estimator. To do this, we set alpha = 8 and beta = 950, estimates determined from when we computed the MOM and MLE estimates. Setting the number of observations for each estimation to 266, we iterated through the MLE and MOM calculations 1000 times, providing us with 1000 method of moments estimates for alpha and beta, and maximum likelihood estimates for alpha and beta. The third graph in the appendix is another 2x2 grid made with \texttt{patchwork} which shows four density curves, each being attributed to either alpha or beta, and either calculated via the MOM estimator or the MLE. Looking at the graphs themselves, it is hard to determine which estimator is better in this case. Each of the alpha plots are nearly indistinguishable from each other, and so are the beta plots.
 
 \indent
 To better determine which estimator is more useful for this distribution, we calculated the bias, precision, and mean squared error
@@ -142,26 +142,34 @@ for the estimates. The table can be found as the third entry in the appendix. Lo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \onecolumn
 \section{Appendix}
+
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.75\textwidth]{Rplot06.png}
+    \includegraphics[width=.75\textwidth]{HHHH}
     \caption{}
     \label{fig:first}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.75\textwidth]{Rplot08.png}
+    \includegraphics[width=.75\textwidth]{Rplot06.png}
     \caption{}
     \label{fig:second}
 \end{figure}
 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.75\textwidth]{Rplot08.png}
+    \caption{}
+    \label{fig:third}
+\end{figure}
+
 \begin{figure}[!t]
-    \vspace{-5in} % Adjust this value to move the figure upwards or downwards
+    \vspace{-2in} % Adjust this value to move the figure upwards or downwards
     \centering
     \includegraphics[width=.75\textwidth]{Table}
     \caption{}
-    \label{fig:second}
+    \label{fig:fourth}
 \end{figure}
 
 
