@@ -62,16 +62,17 @@ Furthermore, the  \texttt{cumstats} \citep{cumstats} package allowed us to compu
 In lab 8 we were tasked with computing the Method of Moments (MOM), and Maximum Likelihood (MLE) estimators for the beta distribution which we used to model country death rates worldwide in 2022. The Method of Moments estimator estimates alpha and beta in the beta distribution by equating the sample moments, such as the sample mean and variance, to the theoretical moments of the distribution. The Maximum Likelihood Estimator estimates the parameters of the Beta distribution by maximizing the Beta distribution's likelihood function, which represents the probability of observing the given data as a function of the distribution's parameters.
 
 \section{Example}
-Computing the MOM and MLE estimators gave us estimates of the true values for alpha and beta for the beta distribution which can model country death rates worldwide in 2022. The third graph in the appendix shows both the MLE estimator and the MOM estimator superimposed onto the actual data. Although each estimator slightly underestimates the peak of the distribution, they each very closely follow it and are unsurprisingly nearly identical to each other. 
+Computing the MOM and MLE estimators gave us estimates of the true values for alpha and beta for the beta distribution which can model country death rates worldwide in 2022. The first graph in the appendix shows both the MLE estimator and the MOM estimator superimposed onto the actual data. Although each estimator slightly underestimates the peak of the distribution, they each very closely follow it and are unsurprisingly nearly identical to each other. 
 
 \indent
-The final part of lab 8 tasked us with determining which estimator is better in this case, the MOM estimator or MLE estimator. To do this, we set alpha = 8 and beta = 950, estimates determined from when we computed the MOM and MLE estimates. Setting the number of observations for each estimation to 266, we iterated through the MLE and MOM calculations 1000 times, providing us with 1000 method of moments estimates for alpha and beta, and maximum likelihood estimates for alpha and beta. The third graph in the appendix is another 2x2 grid made with \texttt{patchwork} which shows four density curves, each being attributed to either alpha or beta, and either calculated via the MOM estimator or the MLE. Looking at the graphs themselves, it is hard to determine which estimator is better in this case. Each of the alpha plots are nearly indistinguishable from each other, and so are the beta plots.
+The final part of lab 8 tasked us with determining which estimator is better in this case, the MOM estimator or MLE estimator. To do this, we set alpha = 8 and beta = 950, estimates determined from when we computed the MOM and MLE estimates. Setting the number of observations for each estimation to 266, we iterated through the MLE and MOM calculations 1000 times, providing us with 1000 method of moments estimates for alpha and beta, and maximum likelihood estimates for alpha and beta. The second graph in the appendix is another 2x2 grid made with \texttt{patchwork} which shows four density curves, each being attributed to either alpha or beta, and either calculated via the MOM estimator or the MLE. Looking at the graphs themselves, it is hard to determine which estimator is better in this case. Each of the alpha plots are nearly indistinguishable from each other, and so are the beta plots.
 
 \indent
 To better determine which estimator is more useful for this distribution, we calculated the bias, precision, and mean squared error
 for the estimates. The table can be found as the third entry in the appendix. Looking at the table, it becomes apparent that for both alpha and beta, the MOM estimator is slightly more biased, less precise, and has a greater mean squared error. Therefore, in the case of using the beta distribution to model country death rates worldwide in 2022, the MLE estimator is a little bit better at estimating the true values of alpha and beta. This result makes sense because the MLE estimator is typically more consistent with larger sample sizes when compared to the MOM estimator. As a result, the MLE is better suited for providing more reliable estimates of alpha and beta when modeling complex data like country death rates worldwide in 2022.
 
-
+\section{Summary and Elaboration}
+The Beta distribution is a continuous probability distribution defined on the interval [0, 1], characterized by two shape parameters, alpha and beta. It is often used to model random variables that represent proportions or probabilities, such as country death rates as we looked at in this lab. The distribution’s shape is highly sensitive to these parameters, and it can take a variety of forms. Figure four in the appendix shows the shapes the distribution took on for the values of alpha and beta we were using during lab 7. The beta distribution's properties include  mean, variance, skewness, and excess kurtosis, all of which can be derived from alpha and beta. To find alpha and beta, one can use the either the MOM or MLE estimators, however we found that in the lab the MLE estimator was better. By simulating data and analyzing real-world data such as we did in this lab, we can better understand how the Beta distribution behaves under different conditions, revealing key insights about the distribution’s role in modeling diverse data sets.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
@@ -94,33 +95,33 @@ for the estimates. The table can be found as the third entry in the appendix. Lo
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.75\textwidth]{HHHH}
+    \includegraphics[width=.75\textwidth]{Rplot06.png}
     \caption{}
     \label{fig:first}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.75\textwidth]{Rplot06.png}
+    \includegraphics[width=.75\textwidth]{Rplot08.png}
     \caption{}
     \label{fig:second}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!t]
+    \vspace{-1in} % Adjust this value to move the figure upwards or downwards
     \centering
-    \includegraphics[width=.75\textwidth]{Rplot08.png}
+    \includegraphics[width=.75\textwidth]{Table}
     \caption{}
     \label{fig:third}
 \end{figure}
 
-\begin{figure}[!t]
-    \vspace{-2in} % Adjust this value to move the figure upwards or downwards
+\begin{figure}[!htbp]
+    \vspace{-4in}
     \centering
-    \includegraphics[width=.75\textwidth]{Table}
+    \includegraphics[width=.75\textwidth]{HHHH}
     \caption{}
     \label{fig:fourth}
 \end{figure}
-
 
 
 
