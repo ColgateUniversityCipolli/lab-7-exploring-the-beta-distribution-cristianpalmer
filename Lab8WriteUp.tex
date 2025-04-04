@@ -110,10 +110,19 @@ Pictured at the top of the second column is a 2x2 grid of histograms depicting t
 Furthermore, the  \texttt{cumstats} \citep{cumstats} package allowed us to compute the cumulative numerical summaries for each property. For 50 iterations of the alpha = 2 and beta = 5 beta distribution, we ran the \texttt{cumstats} functions on a sample size of 500 to generate a set of 50 line plots for each property. For each property, the plot below shows how with a large enough sample size, all the properties all average out to their true value. Plotted below is another 2x2 grid made using \texttt{patchwork}, however this grid depicts four line graphs, each showing 50 different iterations in which each property averages out to their respective true value as the sample size increases. 
 \includegraphics[width=0.435\textwidth]{2x2Grid2.pdf}
 \section{Estimators}
-In lab 8 we were tasked with computing the Method of Moments (M.O.M), and Maximum Likelihood (M.L.E) estimators for the beta distribution modeling country death rates worldwide. Computing these estimators gave us extremely precise estimates of the true values for alpha and beta.
-
+In lab 8 we were tasked with computing the Method of Moments (MOM), and Maximum Likelihood (MLE) estimators for the beta distribution which we used to model country death rates worldwide in 2022. The Method of Moments estimator estimates alpha and beta in the beta distribution by equating the sample moments, such as the sample mean and variance, to the theoretical moments of the distribution. The Maximum Likelihood Estimator estimates the parameters of the Beta distribution by maximizing the Beta distribution's likelihood function, which represents the probability of observing the given data as a function of the distribution's parameters.
 
 \section{Example}
+Computing the MOM and MLE estimators gave us estimates of the true values for alpha and beta for the beta distribution which can model country death rates worldwide in 2022. The first graph in the appendix shows both the MLE estimator and the MOM estimator superimposed onto the actual data. Although each estimator slightly underestimates the peak of the distribution, they each very closely follow it and are unsurprisingly nearly identical to each other. 
+
+\indent
+The final part of lab 8 tasked us with determining which estimator is better in this case, the MOM estimator or MLE estimator. To do this, we set alpha = 8 and beta = 950, estimates determined from when we computed the MOM and MLE estimates. Setting the number of observations for each estimation to 266, we iterated through the MLE and MOM calculations 1000 times, providing us with 1000 method of moments estimates for alpha and beta, and maximum likelihood estimates for alpha and beta. The second graph in the appendix is another 2x2 grid made with \texttt{patchwork} which shows four density curves, each being attributed to either alpha or beta, and either calculated via the MOM estimator or the MLE. Looking at the graphs themselves, it is hard to determine which estimator is better in this case. Each of the alpha plots are nearly indistinguishable from each other, and so are the beta plots.
+
+\indent
+To better determine which estimator is more useful for this distribution, we calculated the bias, precision, and mean squared error
+for the estimates. The table can be found as the third entry in the appendix. Looking at the table, it becomes apparent that for both alpha and beta, the MOM estimator is slightly more biased, less precise, and has a greater mean squared error. Therefore, in the case of using the beta distribution to model country death rates worldwide in 2022, the MLE estimator is a little bit better at estimating the true values of alpha and beta. This result makes sense because the MLE estimator is typically more consistent with larger sample sizes when compared to the MOM estimator. As a result, the MLE is better suited for providing more reliable estimates of alpha and beta when modeling complex data like country death rates worldwide in 2022.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
@@ -131,15 +140,29 @@ In lab 8 we were tasked with computing the Method of Moments (M.O.M), and Maximu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \onecolumn
 \section{Appendix}
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.2\textwidth]{Appendix1.png}
+    \includegraphics[width=.75\textwidth]{Rplot06.png}
+    \caption{}
+    \label{fig:first}
 \end{figure}
 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.75\textwidth]{Rplot08.png}
+    \caption{}
+    \label{fig:second}
+\end{figure}
 
+\begin{figure}[!t]
+    \vspace{-5in} % Adjust this value to move the figure upwards or downwards
+    \centering
+    \includegraphics[width=.75\textwidth]{Table}
+    \caption{}
+    \label{fig:second}
+\end{figure}
 
 
 

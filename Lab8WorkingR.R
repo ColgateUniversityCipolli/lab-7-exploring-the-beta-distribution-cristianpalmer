@@ -182,7 +182,7 @@ for (i in 1:1000){
 alpha_MOM <- ggplot(results_tibble) +
   geom_density(aes(x = alpha_hat_mom), fill = "blue", alpha = 0.5) +
   labs(
-    title = "Density of Estimated Alpha (Method of Moments)",
+    title = "Density of Estimated Alpha (MOM)",
     x = "Estimated Alpha",
     y = "Density"
   ) +
@@ -193,7 +193,7 @@ alpha_MOM <- ggplot(results_tibble) +
 beta_MOM <- ggplot(results_tibble) +
   geom_density(aes(x = beta_hat_mom), fill = "red", alpha = 0.5) +
   labs(
-    title = "Density of Estimated Beta (Method of Moments)",
+    title = "Density of Estimated Beta (MOM)",
     x = "Estimated Beta",
     y = "Density"
   ) +
@@ -204,7 +204,7 @@ beta_MOM <- ggplot(results_tibble) +
 alpha_MLE <- ggplot(results_tibble) +
   geom_density(aes(x = alpha_hat_mle), fill = "pink", alpha = 0.5) +
   labs(
-    title = "Density of Estimated Alpha (Maximum Likelihood Estimator)",
+    title = "Density of Estimated Alpha (MLE)",
     x = "Estimated Alpha",
     y = "Density"
   ) +
@@ -215,7 +215,7 @@ alpha_MLE <- ggplot(results_tibble) +
 beta_MLE <- ggplot(results_tibble) +
   geom_density(aes(x = beta_hat_mle), fill = "purple", alpha = 0.5) +
   labs(
-    title = "Density of Estimated Beta (Maximum Likelihood Estimator)",
+    title = "Density of Estimated Beta (MLE)",
     x = "Estimated Beta",
     y = "Density"
   ) +
@@ -257,3 +257,7 @@ results_summary <- tibble(
 xt <- xtable(results_summary, 
              caption = "Estimation Metrics",
              label = "tab:estimation_metrics")
+
+print(xt, file = "estimation_metrics_table.tex", 
+      include.rownames = FALSE, 
+      caption.placement = "top")
